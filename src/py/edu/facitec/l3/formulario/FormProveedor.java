@@ -343,6 +343,7 @@ public class FormProveedor extends JDialog {
 		btnCerrar.setForeground(Color.BLACK);
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cerrar();
 				
 			}
 		});
@@ -508,7 +509,12 @@ public class FormProveedor extends JDialog {
 	 private void desabilitarG() {
 		this.btnGuardar.setEnabled(false);
 	}
-	 
+     private void cerrar() {
+		
+     this.dispose();
+     
+     
+     }	 
 	}
 
 	

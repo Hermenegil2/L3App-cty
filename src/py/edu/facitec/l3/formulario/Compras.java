@@ -1,4 +1,4 @@
-package py.edu.facitec.l3.menu;
+package py.edu.facitec.l3.formulario;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -39,7 +39,8 @@ public class Compras extends JFrame {
 	 Connection cn=null;
 	 CallableStatement cts=null;
 	Integer sumatoria1=0;
-	Integer subtotal=0;
+	Integer sumatoria=0;
+	Integer valor=0;
 	private JPanel contentPane;
 	private JTextField idfun;
 	private JTextField nombrefun;
@@ -297,7 +298,8 @@ public class Compras extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				agregarFormularioEnTabla();
 				limpiar();
-				sumatoriaEnTablas();
+				sumar();
+				
 			}
 		});
 		btnAgregar.setBackground(Color.CYAN);
@@ -380,7 +382,7 @@ public class Compras extends JFrame {
 		hora = new JTextField();
 		hora.setEditable(false);
 		hora.setFont(new Font("TimesHeavy", Font.BOLD, 12));
-		hora.setBounds(904, 32, 61, 20);
+		hora.setBounds(893, 32, 72, 20);
 		contentPane.add(hora);
 		hora.setColumns(10);
 		
@@ -455,12 +457,12 @@ public class Compras extends JFrame {
 			}
 	}
 		private void agregarFormularioEnTabla() {
-			int cantidad=0,valor=0,precio=0;
+			int cantidad=0,precio=0;
 			cantidad=Integer.parseInt(cantidadart.getText());
 			precio=Integer.parseInt(preciocompraart.getText());
 			valor =cantidad*precio;
-			subtotal += valor;
-			  totalart.setText(subtotal.toString());
+			
+			  totalart.setText(valor.toString());
 			DefaultTableModel modelo=(DefaultTableModel) table.getModel();
 			Object[] fila=new Object[5];
 			fila[0]=idart.getText();
@@ -476,7 +478,7 @@ public class Compras extends JFrame {
 		private void fecha_hora() {  
 		 Calendar cal=Calendar.getInstance();
 		 String fechaa=cal.get(Calendar.DATE)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(cal.YEAR);
-		String horaa=cal.get(cal.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(cal.SECOND); 
+		String horaa=cal.get(cal.HOUR)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(cal.SECOND); 
 		this.fecha.setText(fechaa); 
 		this.hora.setText(horaa);
 		}
@@ -488,33 +490,16 @@ public class Compras extends JFrame {
 			this.cantidadart.setText("");
 			this.totalart.setText("");
 		}
-		private void sumatoriaEnTablas() {
-
-			double sumatoria1=0.0;
-
-			        int totalRow= table.getRowCount();
-
-			        totalRow-=1;
-
-			        for(int i=0;i<=(totalRow);i++)
-
-			        {
-
-			              double sumatoria= Double.parseDouble(String.valueOf(table.getValueAt(i,4)));
-
-			
-			             Double t=0.0;
-			             sumatoria1+=sumatoria;
-                         
-			 
-			            totalestotal.setText(this.sumatoria1.toString());
-			          
-
-			 
-
-			           }
-
-		}
+	    public void sumar(){
+	        int totalRow= table.getRowCount();
+	        totalRow-=1;
+	        for(int i=0;i<=(totalRow);i++)
+	        {
+	             sumatoria=Integer.parseInt(String.valueOf(table.getValueAt(i,4)));
+	           }
+	        sumatoria1+=sumatoria;
+	        totalestotal.setText(String.valueOf(sumatoria1));
+	}
 		}
 		
 		
